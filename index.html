@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Dontstarveluajit by paintdream</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Dontstarveluajit</h1>
+      <h2 class="project-tagline">LuaJIT for DontStarve (compatible with DS, RoG, SW, not with DST)</h2>
+      <a href="https://github.com/paintdream/DontStarveLuaJIT" class="btn">View on GitHub</a>
+      <a href="https://github.com/paintdream/DontStarveLuaJIT/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/paintdream/DontStarveLuaJIT/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="dontstarveluajit-for-windows" class="anchor" href="#dontstarveluajit-for-windows" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>DontStarveLuaJIT for Windows</h1>
+
+<pre><code>_LuaJIT for DontStarve (compatible with DS, RoG, SW, not with DST)_
+
+Tested revisions（已测试版本）:  v181038-v181319 WIN32_STEAM
+</code></pre>
+
+<h4>
+<a id="the-first-test-version-of-dontstarveluajit-for-windows" class="anchor" href="#the-first-test-version-of-dontstarveluajit-for-windows" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The first test version of DontStarveLuaJIT for Windows</h4>
+
+<h4>
+<a id="这是dontstarveluajit-for-windows-的第一个测试版本" class="anchor" href="#%E8%BF%99%E6%98%AFdontstarveluajit-for-windows-%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%B5%8B%E8%AF%95%E7%89%88%E6%9C%AC" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>这是DontStarveLuaJIT For Windows 的第一个测试版本！</h4>
+
+<h4>
+<a id="please-backup-your-saves-before-applying-this-patch" class="anchor" href="#please-backup-your-saves-before-applying-this-patch" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>PLEASE BACKUP YOUR SAVES BEFORE APPLYING THIS PATCH.</h4>
+
+<h4>
+<a id="在启用这个补丁之前请务必备份你的所有存档" class="anchor" href="#%E5%9C%A8%E5%90%AF%E7%94%A8%E8%BF%99%E4%B8%AA%E8%A1%A5%E4%B8%81%E4%B9%8B%E5%89%8D%E8%AF%B7%E5%8A%A1%E5%BF%85%E5%A4%87%E4%BB%BD%E4%BD%A0%E7%9A%84%E6%89%80%E6%9C%89%E5%AD%98%E6%A1%A3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>在启用这个补丁之前，请务必备份你的所有存档。</h4>
+
+<h2>
+<a id="installation安装" class="anchor" href="#installation%E5%AE%89%E8%A3%85" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation（安装）:</h2>
+
+<h5>
+<a id="step-1" class="anchor" href="#step-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Step 1:</h5>
+
+<pre><code>Copy all files from "DontStarveLuaJIT/bin/" to "Steam/SteamApps/common/dont_starve/bin/"
+
+复制"DontStarveLuaJIT/bin/"目录下的所有文件至"Steam/SteamApps/common/dont_starve/bin/"
+</code></pre>
+
+<h5>
+<a id="step-2" class="anchor" href="#step-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Step 2:</h5>
+
+<pre><code>Open "Steam/SteamApps/common/dont_starve/data/scripts/mods.lua" with an text editor. Locate the following lines:
+
+使用文本编辑器打开“Steam/SteamApps/common/dont_starve/data/scripts/mods.lua”文件。定位到如下代码行：
+</code></pre>
+
+<div class="highlight highlight-source-lua"><pre><span class="pl-k">local</span> runmodfn <span class="pl-k">=</span> <span class="pl-k">function</span>(<span class="pl-smi">fn,mod,modtype</span>)
+    <span class="pl-k">return</span> (<span class="pl-k">function</span>(<span class="pl-smi">...</span>)
+        <span class="pl-k">if</span> fn <span class="pl-k">then</span>
+            <span class="pl-k">local</span> arg <span class="pl-k">=</span> {<span class="pl-c1">...</span>} <span class="pl-c">--&lt;&lt;&lt;&lt;</span>
+            <span class="pl-k">local</span> status, r <span class="pl-k">=</span> <span class="pl-c1">xpcall</span>( <span class="pl-k">function</span>() <span class="pl-k">return</span> <span class="pl-c1">fn</span>(<span class="pl-c1">unpack</span>(arg)) <span class="pl-k">end</span>, debug.<span class="pl-smi">traceback</span>)
+            <span class="pl-k">if</span> <span class="pl-k">not</span> status <span class="pl-k">then</span>
+                <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">"</span>error calling <span class="pl-pds">"</span></span><span class="pl-k">..</span>modtype<span class="pl-k">..</span><span class="pl-s"><span class="pl-pds">"</span> in mod <span class="pl-pds">"</span></span><span class="pl-k">..</span><span class="pl-c1">ModInfoname</span>(mod.<span class="pl-smi">modname</span>)<span class="pl-k">..</span><span class="pl-s"><span class="pl-pds">"</span>: <span class="pl-cce">\n</span><span class="pl-pds">"</span></span><span class="pl-k">..</span>r)
+                ModManager:<span class="pl-c1">RemoveBadMod</span>(mod.<span class="pl-smi">modname</span>,r)
+                ModManager:<span class="pl-c1">DisplayBadMods</span>()
+            <span class="pl-k">else</span>
+                <span class="pl-k">return</span> r
+            <span class="pl-k">end</span>
+        <span class="pl-k">end</span>
+    <span class="pl-k">end</span>)
+<span class="pl-k">end</span></pre></div>
+
+<pre><code>Add one line at --&lt;&lt;&lt;&lt; mark as above.
+
+在-&lt;&lt;&lt;&lt;标记处如上所示添加一行代码。
+
+Save mods.lua. 
+
+保存 mods.lua 文件。
+</code></pre>
+
+<h5>
+<a id="step-3" class="anchor" href="#step-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Step 3:</h5>
+
+<pre><code>Open "Steam/SteamApps/common/dont_starve/data/scripts/modutil.lua" with an text editor. 
+
+Replace all 'arg = {...}' with 'local arg = {...}' (quote mark not included)
+
+使用文本编辑器打开“Steam/SteamApps/common/dont_starve/data/scripts/modutil.lua”文件。
+
+将所有的'arg = {...}'替换为'local arg = {...}' （不包含引号）
+</code></pre>
+
+<h5>
+<a id="btw" class="anchor" href="#btw" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>BTW...</h5>
+
+<pre><code>The reason for modification: Official lua distribution 5.1.4+ and LuaJIT refined the concept of variant
+arguments so grammar sugar 'arg' was no longer supported. Lua programmers should use {...} instead. The
+developers of Don't Starve obeyed the rules except 'mods.lua' because '...' cannot be passed across closure
+boundary. So they simply wrote 'arg', which leads to runtime error in LuaJIT and advanced lua engines, 
+since 'arg' is reinterpreted as a global variable (but it's nil). Now we must declare 'arg' manually.
+
+这样修改的原因是：Lua官方所发布的新版lua以及LuaJIT修正了不定长参数的概念，现在lua不再支持'arg'这个
+语法糖来表示不定参数的列表。Lua程序员如果需要，可以显式地使用{...}来代替它。
+
+Don't Starve的开发者在绝大多数情况下都遵守了这个变动。然而，在mods.lua中，他们发现'...'表示的不定参数
+不能穿越闭包边界，因此使用了旧的用法。现在我们需要手动定义'arg'，以保证程序可以正确执行。
+</code></pre>
+
+<h4>
+<a id="notice" class="anchor" href="#notice" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>NOTICE:</h4>
+
+<pre><code>NOTICE: Some mods, for example, 'Smart Craft Pot', are still using 'arg' in its code, which leads to
+crash when player activates related function. Here's an example for fixing it (take 'Smart Craft Pot' as example).
+
+注意：有些MOD，例如'Smart Craft Pot'，也使用了旧式的'arg'语法。当用户触发了含有这种语法的函数时，
+游戏将崩溃。以'Smart Craft Pot'为例，我们也需要修复它：
+
+Open "Steam/SteamApps/common/dont_starve/mods/workshop-662872357/scripts/widgets/foodcrafting.lua" with
+an text editor. Locate the following lines (in fact, the file:line of crashing will be displayed in Don't
+Starve crash screen):
+
+使用文本编辑器打开“Steam/SteamApps/common/dont_starve/mods/workshop-662872357/scripts/widgets/foodcrafting.lua”
+文件，定位到如下代码行（实际上，崩溃的文件：行号在崩溃的时候会显示在Don't Starve 的崩溃界面上，很容易找）：
+</code></pre>
+
+<div class="highlight highlight-source-lua"><pre><span class="pl-k">function</span> <span class="pl-en">FoodCrafting:</span><span class="pl-en">_GetContainerIngredients</span>(<span class="pl-smi">...</span>)
+    <span class="pl-k">local</span> ings <span class="pl-k">=</span> {}
+
+    <span class="pl-c">-- for _,container in ipairs(arg) do -- &gt;&gt;&gt;</span>
+    <span class="pl-k">for</span> _,container <span class="pl-k">in</span> <span class="pl-c1">ipairs</span>({<span class="pl-c1">...</span>}) <span class="pl-k">do</span> <span class="pl-c">-- &lt;&lt;&lt;</span>
+        <span class="pl-k">local</span> slots <span class="pl-k">=</span> container.<span class="pl-smi">slots</span> <span class="pl-k">or</span> container.<span class="pl-smi">itemslots</span> <span class="pl-k">or</span> {}
+
+    <span class="pl-k">for</span> k,v <span class="pl-k">in</span> <span class="pl-c1">pairs</span>(slots) <span class="pl-k">do</span>
+            <span class="pl-k">local</span> amt <span class="pl-k">=</span> v.<span class="pl-smi">components</span>.<span class="pl-smi">stackable</span> <span class="pl-k">and</span> v.<span class="pl-smi">components</span>.<span class="pl-smi">stackable</span>.<span class="pl-smi">stacksize</span> <span class="pl-k">or</span> <span class="pl-c1">1</span>
+        <span class="pl-c1">table.insert</span>(ings, {name<span class="pl-k">=</span>v.<span class="pl-smi">prefab</span>,amt<span class="pl-k">=</span>amt})
+    <span class="pl-k">end</span>
+    <span class="pl-k">end</span>
+  <span class="pl-k">return</span> ings
+<span class="pl-k">end</span></pre></div>
+
+<pre><code>Modify code as above.
+
+如上所示修改即可。
+</code></pre>
+
+<h2>
+<a id="build生成" class="anchor" href="#build%E7%94%9F%E6%88%90" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Build（生成）:</h2>
+
+<pre><code>The project 'lua51' in solution must be compiled under MSVC9 (Visual Studio 2008) to generate 
+binary-compatible code for dontstarve_steam.exe. To compile luajit, please launch Visual C++ 
+Build Prompt and run msvcbuild.bat.
+
+为确保与饥荒主程序的二进制兼容性，解决方案中的lua51必须使用MSVC9（即VS2008）来编译。
+如果您要自行编译luajit，请在Visual C++的控制台中运行luajit目录下的msvcbuild.bat。
+</code></pre>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/paintdream/DontStarveLuaJIT">Dontstarveluajit</a> is maintained by <a href="https://github.com/paintdream">paintdream</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
