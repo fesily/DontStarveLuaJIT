@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>DontStarveLuaJIT by paintdream</title>
+    <title>Dontstarveluajit by paintdream</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -11,11 +11,11 @@
   </head>
   <body>
     <section class="page-header">
-      <h1 class="project-name">DontStarveLuaJIT</h1>
+      <h1 class="project-name">Dontstarveluajit</h1>
       <h2 class="project-tagline">LuaJIT for DontStarve (compatible with DS, RoG, SW, DST)</h2>
       <a href="https://github.com/paintdream/DontStarveLuaJIT" class="btn">View on GitHub</a>
-      <a href="https://github.com/paintdream/DontStarveLuaJIT/releases" class="btn">Download Binary 下载发行包</a>
-      <a href="https://github.com/paintdream/DontStarveLuaJIT/tarball/master" class="btn">Download Source 下载源码包</a>
+      <a href="https://github.com/paintdream/DontStarveLuaJIT/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/paintdream/DontStarveLuaJIT/tarball/master" class="btn">Download .tar.gz</a>
     </section>
 
     <section class="main-content">
@@ -81,6 +81,34 @@ Tested revisions（已测试版本）:  v181038-v181319 WIN32_STEAM
 <h5>
 <a id="step-2" class="anchor" href="#step-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Step 2:</h5>
 
+<pre><code>Open "[Your Don't Starve Directory]/data/scripts/main.lua" with an text editor.
+Add following lines at the beginning:
+
+使用文本编辑器打开“[您的Don't Starve安装目录]/data/scripts/main.lua”文件。
+在开头添加如下代码：
+</code></pre>
+
+<div class="highlight highlight-source-lua"><pre><span class="pl-k">local</span> <span class="pl-k">function</span> <span class="pl-en">unpackex</span> (<span class="pl-smi">t, index, limit</span>)
+    <span class="pl-k">if</span> (index <span class="pl-k">&lt;=</span> limit) <span class="pl-k">then</span>
+        <span class="pl-k">return</span> t[index], <span class="pl-c1">unpackex</span>(t, index <span class="pl-k">+</span> <span class="pl-c1">1</span>, limit)
+    <span class="pl-k">end</span>
+<span class="pl-k">end</span>
+
+unpack <span class="pl-k">=</span> <span class="pl-k">function</span> (t)
+    <span class="pl-k">local</span> cnt <span class="pl-k">=</span> <span class="pl-c1">0</span>
+    <span class="pl-k">for</span> k <span class="pl-k">in</span> <span class="pl-c1">pairs</span>(t) <span class="pl-k">do</span>
+        <span class="pl-k">if</span> (<span class="pl-c1">type</span>(k) <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">"</span>number<span class="pl-pds">"</span></span>) <span class="pl-k">then</span>
+            cnt <span class="pl-k">=</span> k
+        <span class="pl-k">end</span>
+    <span class="pl-k">end</span>
+
+    <span class="pl-k">return</span> <span class="pl-c1">unpackex</span>(t, <span class="pl-c1">1</span>, cnt)
+<span class="pl-k">end</span>
+</pre></div>
+
+<h5>
+<a id="step-3-for-dst仅针对联机版" class="anchor" href="#step-3-for-dst%E4%BB%85%E9%92%88%E5%AF%B9%E8%81%94%E6%9C%BA%E7%89%88" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Step 3: (FOR DST，仅针对联机版)</h5>
+
 <pre><code>If it's DST, open "[Your Don't Starve Directory]/data/scripts/util.lua" with an text editor.
 Locate the following lines:
 
@@ -104,6 +132,8 @@ Locate the following lines:
 Save util.lua. 
 
 保存 util.lua 文件。
+
+
 
 If it's DST, open "[Your Don't Starve Directory]/data/scripts/networkclientrpc.lua" with an text editor.
 Locate the following lines (Search 'Generate RPC codes from table of handlers'):
