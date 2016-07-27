@@ -78,47 +78,10 @@ Tested revisions（已测试版本）:  v181038-v181319 WIN32_STEAM
 复制"DontStarveLuaJIT/bin/"目录下的所有文件至"[您的Don't Starve安装目录]/bin/"
 </code></pre>
 
-<h5>
-<a id="step-2" class="anchor" href="#step-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Step 2:</h5>
 
-<pre><code>Open "[Your Don't Starve Directory]/data/scripts/main.lua" and insert the following lines to the beginning of the file.
-
-使用文本编辑器打开“[您的Don't Starve安装目录]/data/scripts/main.lua”在文件开头添加如下代码：
-</code></pre>
-
-<div class="highlight highlight-source-lua"><pre><span class="pl-k">local</span> orgsort <span class="pl-k">=</span> table.<span class="pl-smi">sort</span>
-
-<span class="pl-c">-- stable sort</span>
-table.<span class="pl-smi">sort</span> <span class="pl-k">=</span> <span class="pl-k">function</span> (tab, cmp)
-    <span class="pl-c">-- record order</span>
-    <span class="pl-k">if</span> (cmp <span class="pl-k">and</span> <span class="pl-c1">type</span>(cmp) <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">"</span>function<span class="pl-pds">"</span></span>) <span class="pl-k">then</span>
-        <span class="pl-c">-- mark original order</span>
-        <span class="pl-k">local</span> order <span class="pl-k">=</span> {}
-        <span class="pl-k">for</span> i, v <span class="pl-k">in</span> <span class="pl-c1">ipairs</span>(tab) <span class="pl-k">do</span>
-            order[v] <span class="pl-k">=</span> i
-        <span class="pl-k">end</span>
-
-        <span class="pl-k">return</span> <span class="pl-c1">orgsort</span>(tab, <span class="pl-k">function</span> (a, b)
-            <span class="pl-k">local</span> left <span class="pl-k">=</span> <span class="pl-c1">cmp</span>(a, b)
-            <span class="pl-k">local</span> right <span class="pl-k">=</span> <span class="pl-c1">cmp</span>(b, a)
-            <span class="pl-k">if</span> (left <span class="pl-k">==</span> right) <span class="pl-k">then</span>
-                <span class="pl-k">return</span> order[a] <span class="pl-k">&lt;</span> order[b]
-            <span class="pl-k">else</span>
-                <span class="pl-k">return</span> left
-            <span class="pl-k">end</span>
-        <span class="pl-k">end</span>)
-    <span class="pl-k">else</span>
-        <span class="pl-k">return</span> <span class="pl-c1">orgsort</span>(tab, cmp)
-    <span class="pl-k">end</span>
-<span class="pl-k">end</span></pre></div>
-
-<pre><code>Save main.lua. 
-
-保存 main.lua 文件。
-</code></pre>
 
 <h5>
-<a id="step-3-for-dst仅针对联机版" class="anchor" href="#step-3-for-dst%E4%BB%85%E9%92%88%E5%AF%B9%E8%81%94%E6%9C%BA%E7%89%88" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Step 3: (FOR DST，仅针对联机版)</h5>
+<a id="step-3-for-dst仅针对联机版" class="anchor" href="#step-3-for-dst%E4%BB%85%E9%92%88%E5%AF%B9%E8%81%94%E6%9C%BA%E7%89%88" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Step 2: (FOR DST，仅针对联机版)</h5>
 
 <pre><code>If it's DST, open "[Your Don't Starve Directory]/data/scripts/util.lua" with an text editor.
 Locate the following lines:
@@ -146,7 +109,7 @@ Save util.lua.
 </code></pre>
 
 <h5>
-<a id="step-4-for-dst仅针对联机版" class="anchor" href="#step-4-for-dst%E4%BB%85%E9%92%88%E5%AF%B9%E8%81%94%E6%9C%BA%E7%89%88" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Step 4: (FOR DST，仅针对联机版)</h5>
+<a id="step-4-for-dst仅针对联机版" class="anchor" href="#step-4-for-dst%E4%BB%85%E9%92%88%E5%AF%B9%E8%81%94%E6%9C%BA%E7%89%88" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Step 3: (FOR DST，仅针对联机版)</h5>
 
 <pre><code>If it's DST, open "[Your Don't Starve Directory]/data/scripts/networkclientrpc.lua" with an text editor.
 Locate the following lines (Search 'Generate RPC codes from table of handlers'):
