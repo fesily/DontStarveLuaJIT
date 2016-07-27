@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>DontStarveLuaJIT by paintdream</title>
+    <title>Dontstarveluajit by paintdream</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -11,11 +11,11 @@
   </head>
   <body>
     <section class="page-header">
-      <h1 class="project-name">DontStarveLuaJIT</h1>
+      <h1 class="project-name">Dontstarveluajit</h1>
       <h2 class="project-tagline">LuaJIT for DontStarve (compatible with DS, RoG, SW, DST)</h2>
       <a href="https://github.com/paintdream/DontStarveLuaJIT" class="btn">View on GitHub</a>
-      <a href="https://github.com/paintdream/DontStarveLuaJIT/releases" class="btn">Download Binary 下载发行包</a>
-      <a href="https://github.com/paintdream/DontStarveLuaJIT/tarball/master" class="btn">Download Source 下载源码包</a>
+      <a href="https://github.com/paintdream/DontStarveLuaJIT/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/paintdream/DontStarveLuaJIT/tarball/master" class="btn">Download .tar.gz</a>
     </section>
 
     <section class="main-content">
@@ -86,17 +86,35 @@ Tested revisions（已测试版本）:  v181038-v181319 WIN32_STEAM
 在“[您的Don't Starve安装目录]/data/”目录下搜索所有的"actions.lua"，打开它们并定位到如下代码：
 </code></pre>
 
-<div class="highlight highlight-source-lua"><pre>    TALKTO <span class="pl-k">=</span> <span class="pl-c1">Action</span>(<span class="pl-c1">3</span>, <span class="pl-c1">true</span>),
-    WALKTO <span class="pl-k">=</span> <span class="pl-c1">Action</span>(<span class="pl-k">-</span><span class="pl-c1">4</span>),
+<div class="highlight highlight-source-lua"><pre>ACTIONS<span class="pl-k">=</span>
+{
+    REPAIR <span class="pl-k">=</span> <span class="pl-c1">Action</span>(),
+    REPAIRBOAT <span class="pl-k">=</span> <span class="pl-c1">Action</span>(<span class="pl-c1">nil</span>, <span class="pl-c1">nil</span>, <span class="pl-c1">nil</span>, <span class="pl-c1">3</span>),
+    READ <span class="pl-k">=</span> <span class="pl-c1">Action</span>(),
+    READMAP <span class="pl-k">=</span> <span class="pl-c1">Action</span>(),
+    DROP <span class="pl-k">=</span> <span class="pl-c1">Action</span>(<span class="pl-k">-</span><span class="pl-c1">1</span>),
+    <span class="pl-c1">...</span>
     BAIT <span class="pl-k">=</span> <span class="pl-c1">Action</span>(),
-    CHECKTRAP <span class="pl-k">=</span> <span class="pl-c1">Action</span>(<span class="pl-c1">2.5</span>), <span class="pl-c">---&lt;&lt;&lt;&lt;</span>
+    CHECKTRAP <span class="pl-k">=</span> <span class="pl-c1">Action</span>(<span class="pl-c1">2.5</span>), <span class="pl-c">----&lt;&lt;&lt;&lt;</span>
     BUILD <span class="pl-k">=</span> <span class="pl-c1">Action</span>(),
     PLANT <span class="pl-k">=</span> <span class="pl-c1">Action</span>(),
-    HARVEST <span class="pl-k">=</span> <span class="pl-c1">Action</span>(),</pre></div>
+    <span class="pl-c1">...</span>
+    MOUNT <span class="pl-k">=</span> <span class="pl-c1">Action</span>(<span class="pl-c1">0.5</span>, <span class="pl-c1">nil</span>, <span class="pl-c1">nil</span>, <span class="pl-c1">5</span>),  <span class="pl-c">---&lt;&lt;&lt;&lt;</span>
+    DISMOUNT <span class="pl-k">=</span> <span class="pl-c1">Action</span>(<span class="pl-c1">0.5</span>, <span class="pl-c1">nil</span>, <span class="pl-c1">nil</span>, <span class="pl-c1">2.5</span>), <span class="pl-c">---&lt;&lt;&lt;&lt;</span>
+    <span class="pl-c1">...</span>
+    STICK <span class="pl-k">=</span> <span class="pl-c1">Action</span>(),
+    MATE <span class="pl-k">=</span> <span class="pl-c1">Action</span>(),
+    CRAB_HIDE <span class="pl-k">=</span> <span class="pl-c1">Action</span>(),
+    DRINK <span class="pl-k">=</span> <span class="pl-c1">Action</span>(),
+    TIGERSHARK_FEED <span class="pl-k">=</span> <span class="pl-c1">Action</span>(),
+    FLUP_HIDE <span class="pl-k">=</span> <span class="pl-c1">Action</span>(),
+    THROW <span class="pl-k">=</span> <span class="pl-c1">Action</span>(<span class="pl-c1">0</span>, <span class="pl-c1">false</span>, <span class="pl-c1">true</span>, <span class="pl-c1">20</span>, <span class="pl-c1">true</span>),
+    LAUNCH_THROWABLE <span class="pl-k">=</span> <span class="pl-c1">Action</span>(<span class="pl-c1">0</span>, <span class="pl-c1">false</span>, <span class="pl-c1">true</span>, <span class="pl-c1">20</span>, <span class="pl-c1">true</span>),
+}</pre></div>
 
-<pre><code>Change the value from 2 to 2.5 at ----&lt;&lt;&lt;&lt; 
+<pre><code>Change the value as above ----&lt;&lt;&lt;&lt;. 
 
-如----&lt;&lt;&lt;&lt; 处所示，将原有的值2修改为2.5。
+如----&lt;&lt;&lt;&lt; 处所示修改Action后的值（如果没找到就略过）。
 </code></pre>
 
 <h5>
